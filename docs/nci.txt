@@ -1,0 +1,50 @@
+$Id: nci.txt 485 2008-11-10 17:12:07Z jhorwitz $
+
+This file documents the use of NCI in mod_parrot.
+
+NCI is used to call Apache API and mod_parrot functions from Parrot.  In its
+purest form, NCI requries no additional C code, but NCI does not always meet
+the data type requirements of all C functions.  In these cases, individual
+wrappers can be written in C.  Following are the rules for using NCI and
+C wrappers in the mod_parrot source:
+
+1) All reasonable efforts should be made to access the Apache API through
+   Parrot's traditional NCI mechanism.  This requires no additional C code.
+   NCI objects for these functions should be defined in the Parrot namespace
+   Apache::NCI.  The PIR code to load these objects is in various files in
+   lib/Apache.
+
+2) If an Apache API function cannot be called through NCI, it should be wrapped
+   in a small C function that can be called through NCI.  This function should
+   be placed in nci.c and its NCI object should be defined in the Parrot
+   namespace ['ModParrot';'NCI'].  The function should be prefixed with
+   mpnci_.  The PIR code to load the object should be placed in
+   lib/mod_parrot.pir.
+
+3) mod_parrot functions that should be callable via NCI should be placed in
+   nci.c and defined in the Parrot namespace ['ModParrot';'NCI'].  The first
+   argument passed to the function should be the Parrot interpreter, which
+   Parrot will handle for you if you use the 'J' signature.  Each function
+   should be prefixed with mpnci_.  The PIR code to load these objects should
+   be placed in lib/mod_parrot.pir.
+
+4) Wrapper functions MUST maintain the same parameter order as the
+   corresponding Apache API function.  This is to ensure future compatibility
+   if the Apache function becomes callable via NCI without a wrapper.  The
+   signature of the parameters can change though, as unsupported parameter
+   types are the primary reason for writing a wrapper in the first place.
+
+5) Call signatures not already in Parrot's src/call_list.txt file should be
+   added to mod_parrot's call_list.txt file.  When the signature list becomes
+   more stable, a proposal will be made to add the list to the Parrot source.
+   The test suite will automatically test for any signatures in call_list.txt.
+
+6) In order to maintain state between the calling Apache process and the NCI
+   function, we use the interpreter object, which we can pass to each NCI
+   function via the 'J' signature.  Each interpreter contains a context
+   structure (an UnmanagedStruct PMC) in ['_modparrot'];__context that points
+   to a modparrot_context structure.  Use get_interp_ctx() to fetch this in
+   your NCI code.  See mod_parrot.h for details.
+
+NOTE: The namespaces used in this document are subject to change as Parrot's
+namespace conventions become clearer.

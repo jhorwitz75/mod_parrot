@@ -1,0 +1,13 @@
+This directory contains example mod_perl6 handlers.
+
+How to use mod_perl6:
+
+1) In the top level directory, type "make modperl6" to precompile mod_perl6.
+   This is not required, but it does provide a 10x improvement in startup time.
+3) In the Apache's envvars script:
+   a) set PERL6LIB to the absolute path to languages/perl6/lib, or add it to
+      the path (colon-separated) if PERL6LIB is already set.
+   b) Add any local Perl 6 include paths where your handler modules will live.
+   c) Set PARROT_RUNTIME to your parrot source directory.
+4) Configure your handlers in httpd.conf (the examples contain instructions)
+5) Restart Apache (do a full stop and start if you updated envvars).

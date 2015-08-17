@@ -1,0 +1,27 @@
+mod_perl6 will be separated from the mod_parrot source tree following the
+0.5 release.  While it is still bundled here, use the following procedures
+to get registry scripts working (familiarity with Apache concepts assumed):
+
+1) make modperl6
+
+2) In httpd.conf:
+
+   a) add /path/to/mod_parrot/lib to the colon separated ParrotLibPath
+
+   b) add the following configuration:
+
+   ParrotLoadImmediate ModParrot/HLL/perl6.pbc
+   ScriptAlias /path/to/your/cgi/directory
+   <Directory /path/to/your/cgi/directory>
+       Options +ExecCGI
+       SetHandler perl6-script
+       Perl6ResponseHandler ModPerl6::Registry
+   </Directory>
+
+3) In /path/to/apache/bin/envvars:
+
+   PERL6LIB=/path/to/mod_parrot/languages/perl6/lib:/path/to/your/own/perl6/lib
+
+4) Stop and start Apache (don't use restart if you changed envvars)
+
+5) Add scripts to /path/to/your/cgi directory, set the execute bit, and enjoy!

@@ -1,0 +1,39 @@
+# http://docx.webperf.org/structrequest__rec.html
+#
+# This is currently hand generated.
+# At some point we may want to just parse
+# apaches headers to get this info.
+
+the_request        | char *       | rw
+assbackwards       | int          | rw
+proxyreq           | int          | rw
+header_only        | int          | rw
+protocol           | char *       | rw
+proto_num          | int          | rw
+hostname           | const char * | rw
+status_line        | const char * | rw
+status             | int          | rw
+
+# reserved word conflict
+method             | const char * | rw
+method_number      | int          | rw
+chunked            | int          | rw
+range              | const char * | rw
+read_body          | int          | rw
+read_chunked       | int          | rw
+content_type       | const char * | rw
+handler            | const char * | rw
+content_encoding   | const char * | rw
+vlist_validator    | char *       | rw
+user               | char *       | rw
+#ap_auth_type       | char *       | rw
+no_cache           | int          | rw
+no_local_copy      | int          | rw
+unparsed_uri       | char *       | rw
+uri                | char *       | rw
+filename           | char *       | rw
+canonical_filename | char *       | rw
+path_info          | char *       | rw
+args               | char *       | rw
+used_path_info     | int          | rw
+eos_sent           | int          | rw

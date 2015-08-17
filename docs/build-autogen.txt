@@ -1,0 +1,27 @@
+This is documentation for the code auto generation phase of the build process.
+
+Code that is currently being generated.
+---------------------------------------
+ + Most of Apache::Constants (lib/Apache/Constants.pir)
+ + Simple properties of Apache::RequestRec (lib/Apache/RequestRec.pir)
+
+
+Files of importance.
+-------------------
+ + build/lib/generate_source.pl
+   - Entry point for the code generation.
+   - Takes arguments from the Makefile and fires off the code generators.
+
+ + build/lib/Generator/ApacheConstants.pm
+   - Generates the following files:
+     - build/src/pir/apache_constants.pir
+   - Parses httpds httpd.h and http_log.h
+
+ + build/lib/Generator/ApacheRequestRec.pm
+   - Generates the following files:
+     - build/src/pir/request_rec.pir
+     - build/src/pir/request_rec_dlfunc.pir
+     - build/src/nci/request_rec.c
+
+ + build/maps/httpd/request_rec.map
+   - Map of data used to generate the files need for Apache::RequestRec.

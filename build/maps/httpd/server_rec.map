@@ -1,0 +1,29 @@
+# This is currently hand generated.
+# At some point we may want to just parse
+# apaches headers to get this info.
+
+#process             |              | rw
+#next                |              | rw
+defn_name           | const char * | rw
+defn_line_number    | int          | rw
+server_admin        | char *       | rw
+server_hostname     | char *       | rw
+port                | int          | rw
+error_fname         | char *       | rw
+#error_log           |              |
+loglevel            | int          | rw
+is_virtual          | int          | rw
+#module_config       |              | rw
+#lookup_defaults     |              | rw
+#addrs               |              | rw
+timeout             | int          | rw
+keep_alive_timeout  | int          | rw
+keep_alive_max      | int          | rw
+keep_alive          | int          | rw
+path                | const char * | rw
+pathlen             | int          | rw
+#names               |              | rw
+#wild_names          |              | rw
+limit_req_line      | int          | rw
+limit_req_fieldsize | int          | rw
+limit_req_fields    | int          | rw

@@ -1,0 +1,26 @@
+#!/usr/bin/perl6
+
+# $Id$
+
+# This is the registry version of the counter.  See ModPerl6/Counter.pm for
+# more details.
+#
+# Usage:
+# Create a perl6-bin directory
+# Copy this file to perl6-bin
+#
+# ParrotLibPath /path/to/eg/perl6:/path/to/parrot/runtime/parrot/library:/path/to/mod_parrot/lib
+# ParrotLoadImmediate ModParrot/HLL/perl6.pbc
+# <Directory /path/to/perl6-bin>
+#     Options +ExecCGI
+#     SetHandler perl6-script
+#     Perl6ResponseHandler ModPerl6::Registry
+# </Directory>
+
+our $x;
+unless ($x) {
+    $x = 1;
+}
+say "<h1>Hello, I'm a mod_perl6 response handler!</h1>";
+say "Page views for this interpreter: $x";
+$x++;

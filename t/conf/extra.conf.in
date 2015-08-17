@@ -1,0 +1,56 @@
+<IfModule !mod_parrot.c>
+    LoadModule parrot_module @ServerRoot@/../src/.libs/mod_parrot.so
+</IfModule>
+
+ParrotIncludePath @ServerRoot@/../lib
+ParrotLibPath @ServerRoot@/../lib
+ParrotDynextPath @ServerRoot@/../src/pmc
+ParrotInit @ServerRoot@/../lib/mod_parrot.pbc
+ParrotLoadImmediate @ServerRoot@/../lib/ModParrot/HLL/pir.pbc
+ParrotLoad @ServerRoot@/lib/handlers.pbc
+
+# enable for test debugging
+ParrotTrace 0
+
+<Location /parrot-test/RequestRec-get_basic_auth_pw>
+    SetHandler parrot-code
+    ParrotHandler ModParrot::Test::get_basic_auth_pw
+    ParrotAuthenHandler ModParrot::Test::AuthenHandler
+    AuthType Basic
+    AuthName "Parrot Test"
+    Require valid-user
+</Location>
+
+<Location /parrot-test/RequestRec-auth_type>
+    SetHandler parrot-code
+    ParrotHandler ModParrot::Test::auth_type
+    ParrotAuthenHandler ModParrot::Test::AuthenHandler
+    AuthType Basic
+    AuthName "Parrot Test"
+    Require valid-user
+</Location>
+
+<Location /parrot-test/RequestRec-auth_name>
+    SetHandler parrot-code
+    ParrotHandler ModParrot::Test::auth_name
+    ParrotAuthenHandler ModParrot::Test::AuthenHandler
+    AuthType Basic
+    AuthName "Parrot Test"
+    Require valid-user
+</Location>
+
+<Location /parrot-test/ParrotAccessHandler>
+    SetHandler parrot-code
+    ParrotAccessHandler ModParrot::Test::AccessHandler
+    ParrotHandler ModParrot::Test::HelloWorld
+</Location>
+
+<Location /parrot-test/ParrotAuthzHandler>
+    SetHandler parrot-code
+    ParrotHandler ModParrot::Test::HelloWorld
+    ParrotAuthenHandler ModParrot::Test::AuthenHandler
+    ParrotAuthzHandler ModParrot::Test::AuthzHandler
+    AuthType Basic
+    AuthName "Parrot Test"
+    Require valid-user
+</Location>

@@ -1,0 +1,135 @@
+$Id: CHANGES 578 2009-01-04 15:14:56Z jhorwitz $
+
+0.5    January 4, 2009
+       mod_parrot:
+         * Fixes for recent Parrot releases
+         * New architecture with one Apache module per HLL layer
+         * Apache;Module supports creating Apache modules from Parrot
+         * APR;Pool manages memory pools
+         * HLL cleanup handlers are managed by APR;Pool
+         * Custom HLL directives
+         * Per-HLL server & directory configurations
+         * HLL configuration merging
+         * Individual hook registration
+         * Initial support for threaded MPMs (all tests pass for worker MPM)
+         * Migrated mod_parrot modules under 'ModParrot' namespace
+         * Contexts are bound to pools so they persist over multiple phases
+         * Various GC fixes
+         * get_basic_auth_pw returns an array PMC
+         * more Apache constants
+         * Refactored initialization code to support early startup
+         * ParrotLoadImmediate starts interpreter early and loads bytecode/PIR
+         * Refactored C-based PIR handlers into the PIR HLL module
+         * Removed ParrotAddHandler and ParrotAddType
+         * ModParrot;Constants houses mod_parrot specific constants
+         * Apache;RequestRec.read() reads the HTTP body (POST data)
+         * Various configuration fixes
+         * Refactored lots of code to make it easier to maintain
+         * Refactored PIR compilation rules in Makefile
+         * New ModParrotHandle PMC ties Parrot I/O ops to Apache I/O
+         * New Apache directives ParrotLibPath and ParrotDynextPath
+         * Removed mod_nqp (PIR HLL module is now the spec)
+ 
+       mod_perl6:
+         * Replace PIR mod_perl6 with pure-perl mod_perl6
+         * Support for precompiled mod_perl6 & ModPerl6::Registry
+         * Merge handlers
+         * ModPerl6::Registry emulates CGI environment
+         * Perl6Module
+         * Perl6Options
+           * Enable (currently a no-op)
+           * ParseHandlers (currently a no-op)
+         * Method handlers
+         * Custom-named handlers (instead of 'handler')
+         * Rakudo no longer needs to be patched
+         * ModPerl6::Fudge implements missing functionality in Rakudo
+
+0.4    January 20, 2008
+       * Support for Parrot 0.5.1 (Hatachi)
+       * Many fixes for 64-bit platforms
+       * Begin transition to server-side tests
+       * Keep testing infrastructure on make clean (versus distclean)
+       * Update PIR syntax and types that have changed since mod_parrot 0.3
+       * Convert classes to new object model
+       * Convert to nested namespaces
+       * Remove apxs from compile and link phases to add flexibility
+       * Search Parrot runtime path for mod_parrot init code
+       * Remove underscore prefix from HLL handler subs
+       * Map Apache MIME types to HLLs
+       * Map Apache handler names to HLLs
+       * Initialize interpreter at the earliest possible Apache phase
+       * Per-server context pools for virtual hosts (default is per-process)
+       * Properly merge server configs
+       * Can pass a PMC note via pmc_notes()
+       * Implement mod_perl-like cleanup handlers
+       * Use proto-objects make mod_parrot classes instantiable from an HLL
+       * New ModParrot;Context class for accessing mod_parrot data structures
+       * New ModParrot;Interpreter class for interpreter introspection
+       * New TODO list replaces the outdated ROADMAP
+       * Update documentation and examples
+       * New example HLL handlers:
+         - Perl 6
+         - PHP/Plumhead
+         - NQP
+         - Perl 1/Punie
+       * New example handlers in eg
+       * New Apache directives:
+         - ParrotIncludePath
+         - ParrotAddType
+         - ParrotAddHandler
+         - ParrotOptions
+           o Parent
+           o Enable
+
+0.3    August 2, 2005
+       * Support for Parrot 0.2.2 (geeksunite)
+       * Support new Parrot calling conventions (still backwards compatible)
+       * Autogeneration of request_rec methods
+       * All Apache hooks are implemented
+       * The init file is no longer required to be PBC
+       * Include a very simple mod_pugs proof of concept, with tests
+       * ParrotTrace now accepts flags that are passed Parrot's trace facility
+       * Parrot*Handler takes an optional language specifier
+       * Use parrot-config.imc to fetch parrot configuration
+       * Configure.pl no longer requires Apache::Test
+       * ModParrot::NCI::backtrace returns a backtrace string
+       * New APR::Table class
+       * New Apache::RequestRec methods:
+         - notes (returns APR::Table object)
+         - main
+         - prev
+         - next
+         - status
+
+0.2    March 28, 2004
+       * Formal support for Parrot 0.1.2 "Phoenix"
+       * New handlers: authz, access, open_logs
+       * Added test to detect mod_parrot NCI signatures in parrot
+       * Implement HLL layer for language specific handler wrappers
+       * PIR HLL handler passes request_rec as first argument to Parrot handler
+       * Replaced global per-process context with thread-safe context pool
+       * New Apache::RequestRec methods:
+         - hostname
+         - user
+       * log severity constants in Apache::Constants
+       * more design documentation, updated examples
+
+0.1    November 3, 2004
+       * Implement testing framework
+       * Implement authentication handlers
+       * POD documentation for IMC files
+       * New Apache::RequestRec methods:
+         - write (experimental)
+         - log_rerror
+         - get_basic_auth_pw
+         - is_initial_req
+         - note_basic_auth_failure
+         - auth_type
+         - auth_name
+       * Make Apache constants available from Apache/Constants.imc
+       * Return handler status to Apache
+       * Error out gracefully if handler subroutine isn't found
+       * Standardize NCI function names
+
+0.0    September 20, 2004
+       * Initial Release

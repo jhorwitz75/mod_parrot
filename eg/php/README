@@ -1,0 +1,11 @@
+This is a PHP implementation of "Polly" from the Perl 6 examples.  It uses
+the Pipp compiler included with the Parrot distribution.  Place it in your
+document root and configure as follows:
+
+ParrotLibPath /path/to/parrot/runtime/library:/path/to/mod_parrot/lib
+ParrotLoadImmediate ModParrot/HLL/pipp.pbc
+AddType application/x-httpd-php .php
+
+You will also want to set the PARROT_RUNTIME environment variable to your
+parrot build directory before starting Apache.  You can do this on the command
+line or in Apache's envvars script (found in the same directory as apachectl).

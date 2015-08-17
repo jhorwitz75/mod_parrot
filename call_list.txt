@@ -1,0 +1,25 @@
+# $Id: call_list.txt 616 2009-02-22 18:15:48Z jhorwitz $
+#
+# The following NCI signatures are required for mod_parrot to work, and should
+# be added to src/call_list.txt in the parrot source.
+i       ip
+i       JPip
+i       JpP
+i       Jpii
+i       p
+i       tp
+p       J
+p       Jp
+t       J
+t       Jpti
+t       p
+t       pt
+v       p
+v       pit
+v       ptt
+v       Jtiiipt
+p       JttPP
+P       Jtpi
+i       Vppp
+v       pt
+v       Jpt

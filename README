@@ -1,0 +1,85 @@
+$Id: README 585 2009-01-06 22:43:59Z jhorwitz $
+
+OVERVIEW
+--------
+mod_parrot embeds the Parrot virtual machine in the Apache 2 web server,
+allowing you to write handlers in Parrot or any language targeted to the
+Parrot VM.
+
+STATUS
+------
+mod_parrot is slowly maturing.  While its design is stable now, it should
+still be considered pre-alpha, as anything could change at any time.
+
+There are no plans to backport it to Apache 1.3.
+
+REQUIREMENTS
+------------
+* Apache 2.0.x or 2.2.x (2.4 may work but is untested)
+* A recent subversion checkout of Parrot (r35084 or later)
+* Perl 5.8.0 or later for configuration
+* Apache::Test 1.26 or later (for tests)
+
+INSTALLATION
+------------
+To configure, compile, test and install:
+
+1) perl Configure.pl --parrot-build-dir=/path/to/parrot --apxs=/path/to/apxs
+2) make
+3) make test
+4) make install (as root, if appropriate)
+
+CONFIGURING APACHE
+------------------
+NOTE: This is a very basic configuration for a PIR response handler, and is
+only meant as an example.  In addition to this README, please see the
+documentation for the HLL module(s) you are interested in using.
+
+1) Verify mod_parrot is activated in httpd.conf:
+
+   LoadModule parrot_module      modules/mod_parrot.so
+
+2) Tell Apache how to initialize mod_parrot using ParrotInit:
+
+   ParrotInit /path/to/mod_parrot/lib/mod_parrot.pbc
+
+   Alternatively you can copy mod_parrot.pbc to parrot's runtime directory
+   and set the PARROT_RUNTIME environment variable to that directory.
+   mod_parrot will then be able to find this file automatically.
+
+3) Tell mod_parrot where to find its libraries:
+
+   ParrotLibPath /path/to/mod_parrot/lib
+
+4) Load the PIR HLL layer:
+
+   ParrotLoadImmediate ModParrot/HLL/pir.pbc
+
+5) Load your Parrot handler with ParrotLoad.  It can be PIR or compiled PBC.
+
+   ParrotLoad /path/to/your/code
+
+6) Configure a location and set the handler to "parrot-code", the official
+   mod_parrot handler string.  Use ParrotHandler to tell mod_parrot what to
+   run for the content handler by passing it the namespace you used in your
+   code:
+
+   <Location /parrot/squawk>
+       SetHandler parrot-code
+       ParrotHandler MyApp
+   </Location>
+
+   Or use one or more of the other Parrot*Handlers.
+
+6) Restart Apache.
+
+7) Go to the URL you configured and try out your new handler.
+
+DOCUMENTATION
+-------------
+The "docs" directory contains most of the documentation.  Most of it is
+focused on the design of mod_parrot rather than usage.  Additional POD
+documentation can be found in various PIR files in the lib directory.
+
+For more thorough documentation and tutorials, visit the mod_parrot
+web site at http://www.smashing.org/mod_parrot.

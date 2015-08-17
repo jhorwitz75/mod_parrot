@@ -1,0 +1,184 @@
+============================
+mod_parrot Apache Directives
+============================
+
+ParrotInit
+----------
+Syntax:      ParrotInit path
+Default:     PARROT_RUNTIME/runtime/parrot/library/mod_parrot.pbc
+Context:     server config
+Description: Specify path to mod_parrot.pbc
+
+ParrotIncludePath
+----------
+Syntax:      ParrotIncludePath path1[:path2]...
+Default:     none
+Context:     server config
+Description: colon separated list of search paths for Parrot includes
+
+ParrotLibPath
+----------
+Syntax:      ParrotLibPath path1[:path2]...
+Default:     none
+Context:     server config
+Description: colon separated list of search paths for Parrot libraries
+
+ParrotDynextPath
+----------
+Syntax:      ParrotDynextPath path1[:path2]...
+Default:     none
+Context:     server config
+Description: colon separated list of search paths for Parrot extensions
+
+ParrotLoad
+----------
+Syntax:      ParrotLoad path
+Default:     none
+Context:     server config (will eventually be allowed in directory config)
+Description: Load PBC, PIR
+
+ParrotLoadImmediate
+-------------------
+Syntax:      ParrotLoadImmediate path
+Default:     none
+Context:     server config
+Description: Start the interpreter, load and run PBC or PIR
+
+ParrotDebugLevel
+----------------
+Syntax:      ParrotDebug level
+Default:     0
+Context:     server config
+Description: Set mod_parrot's debug level (VERY verbose output).  Levels are:
+             0 = none (default)
+             1 = Apache module activity
+             2 = mod_parrot context activity
+             4 = runtime hook activity
+             8 = Parrot activity
+             16 = HLL activity
+
+ParrotTrace
+-----------
+Syntax:      ParrotTrace level
+Default:     0
+Context:     server config
+Description: Enable Parrot trace output to the error log.  See Parrot docs
+             for the appropriate trace levels.
+
+========================
+PIR HLL Layer Directives
+========================
+
+ParrotHandler
+-------------
+Syntax:      ParrotHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot response handler (hll overrides directory config)
+
+ParrotAuthenHandler
+-------------------
+Syntax:      ParrotAuthenHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot authentication handler (hll overrides directory
+             config)
+
+ParrotAuthzHandler
+------------------
+Syntax:      ParrotAuthzHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot authorization handler (hll overrides directory
+             config)
+ 
+ParrotAccessHandler
+-------------------
+Syntax:      ParrotAccessHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot access handler (hll overrides directory config)
+
+ParrotOpenLogsHandler
+---------------------
+Syntax:      ParrotOpenLogsHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot open_logs handler
+
+ParrotChildInitHandler
+----------------------
+Syntax:      ParrotChildInitHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot child_init handler
+
+ParrotPostConfigHandler
+-----------------------
+Syntax:      ParrotPostConfigHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot post_config handler
+
+ParrotPreConnectionHandler
+--------------------------
+Syntax:      ParrotPreConnectionHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot pre_connection handler
+
+ParrotProcessConnectionHandler
+------------------------------
+Syntax:      ParrotProcessConnectionHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot process_connection handler
+
+ParrotMapToStorageHandler
+-------------------------
+Syntax:      ParrotMapToStorageHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot map_to_storage handler
+
+ParrotTransHandler
+------------------
+Syntax:      ParrotTransHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot trans handler
+
+ParrotPostReadRequestHandler
+----------------------------
+Syntax:      ParrotPostReadRequestHandler handler
+Default:     none
+Context:     server config
+Description: Sets the Parrot post_read_request handler
+
+ParrotHeaderParserHandler
+-------------------------
+Syntax:      ParrotHeaderParserHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot header_parser handler
+
+ParrotTypeHandler
+-----------------
+Syntax:      ParrotTypeHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot type handler
+
+ParrotFixupHandler
+------------------
+Syntax:      ParrotFixupHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot fixup handler
+
+ParrotLogHandler
+----------------
+Syntax:      ParrotLogHandler handler
+Default:     none
+Context:     directory config
+Description: Sets the Parrot log handler
